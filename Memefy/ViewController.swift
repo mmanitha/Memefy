@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     //MARK: Outlets
     
@@ -24,10 +24,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Setting UI Elements
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .black
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        //Setting delegates
+        topText.delegate = self
+        bottomText.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,6 +66,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(picker, animated: true, completion: nil)
     }
     
+    
+    //MARK: textField Functions
+    
+    //GIRL MAKE SURE TO FIX THIS:
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.text = ""
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let userText = textField.text
+        textField.text = userText
+        textField.resignFirstResponder()
+        return true
+    }
 
 }
 
