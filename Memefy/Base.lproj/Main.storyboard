@@ -22,7 +22,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7La-6f-bIp"/>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM TEXT" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HLr-o4-Yyb">
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Znl-IF-k5z">
@@ -45,7 +45,7 @@
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOPTEXT" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qmq-IB-2Oj">
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cje-s3-CSF">
@@ -53,7 +53,11 @@
                                     <constraint firstAttribute="height" constant="44" id="oXG-hq-u3e"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Share" id="aTx-YK-NLY"/>
+                                    <barButtonItem title="Share" id="aTx-YK-NLY">
+                                        <connections>
+                                            <action selector="shareMeme:" destination="BYZ-38-t0r" id="Up5-H3-vqh"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Fwy-bb-vQV"/>
                                     <barButtonItem title="Cancel" id="G9F-DX-cHS"/>
                                 </items>
@@ -64,6 +68,7 @@
                             <constraint firstItem="qmq-IB-2Oj" firstAttribute="centerX" secondItem="7La-6f-bIp" secondAttribute="centerX" id="55g-6H-QSb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Cje-s3-CSF" secondAttribute="trailing" constant="-20" id="59Z-s5-1zw"/>
                             <constraint firstItem="7La-6f-bIp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="24" id="Ab7-sM-kki"/>
+                            <constraint firstItem="qmq-IB-2Oj" firstAttribute="width" secondItem="7La-6f-bIp" secondAttribute="width" id="Fx1-ff-3yk"/>
                             <constraint firstItem="7La-6f-bIp" firstAttribute="top" secondItem="qmq-IB-2Oj" secondAttribute="bottom" constant="-64" id="HKP-ra-LNb"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Znl-IF-k5z" secondAttribute="bottom" id="JyM-Td-Iio"/>
                             <constraint firstItem="Znl-IF-k5z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Pax-RK-dbx"/>
@@ -71,6 +76,7 @@
                             <constraint firstItem="Znl-IF-k5z" firstAttribute="top" secondItem="7La-6f-bIp" secondAttribute="bottom" id="Tth-FB-Sj0"/>
                             <constraint firstItem="7La-6f-bIp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="V3r-Fo-vca"/>
                             <constraint firstItem="HLr-o4-Yyb" firstAttribute="centerX" secondItem="7La-6f-bIp" secondAttribute="centerX" id="VO9-XF-y5h"/>
+                            <constraint firstItem="HLr-o4-Yyb" firstAttribute="width" secondItem="7La-6f-bIp" secondAttribute="width" id="Z00-tR-J0d"/>
                             <constraint firstItem="Cje-s3-CSF" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="bO9-p8-FsC"/>
                             <constraint firstItem="Znl-IF-k5z" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="gbn-bm-HqI"/>
                             <constraint firstItem="HLr-o4-Yyb" firstAttribute="top" secondItem="7La-6f-bIp" secondAttribute="bottom" constant="-69" id="ofs-Wj-Ocj"/>
@@ -78,9 +84,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomBar" destination="Znl-IF-k5z" id="UeN-Bf-Alo"/>
                         <outlet property="bottomText" destination="HLr-o4-Yyb" id="d5V-Id-f4Y"/>
                         <outlet property="cameraButton" destination="w70-0G-tgQ" id="paO-WU-M9s"/>
                         <outlet property="imageView" destination="7La-6f-bIp" id="OBG-U2-wPD"/>
+                        <outlet property="shareButton" destination="aTx-YK-NLY" id="bom-J9-2OK"/>
+                        <outlet property="topBar" destination="Cje-s3-CSF" id="3ot-Yq-tO3"/>
                         <outlet property="topText" destination="qmq-IB-2Oj" id="1fN-iu-IXz"/>
                     </connections>
                 </viewController>
