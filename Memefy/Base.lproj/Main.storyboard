@@ -109,6 +109,7 @@
                         <outlet property="bottomBar" destination="Znl-IF-k5z" id="UeN-Bf-Alo"/>
                         <outlet property="bottomTextField" destination="HLr-o4-Yyb" id="taT-G1-zvM"/>
                         <outlet property="cameraButton" destination="w70-0G-tgQ" id="paO-WU-M9s"/>
+                        <outlet property="cancelButton" destination="G9F-DX-cHS" id="Omd-yR-lU0"/>
                         <outlet property="imageView" destination="7La-6f-bIp" id="OBG-U2-wPD"/>
                         <outlet property="shareButton" destination="aTx-YK-NLY" id="bom-J9-2OK"/>
                         <outlet property="topBar" destination="Cje-s3-CSF" id="3ot-Yq-tO3"/>

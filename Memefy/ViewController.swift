@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    
     //MARK: OUTLETS
     
     @IBOutlet weak var topTextField: UITextField!
@@ -19,30 +20,39 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var topBar: UIToolbar!
     @IBOutlet weak var bottomBar: UIToolbar!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     
     //MARK: PROPERTIES
     
     let defaultTopText = "TOP TEXT"
     let defaultBottomText = "BOTTOM TEXT"
+    var tempText: String? //variable to hold the default text of textfield so you can change text back if textfield is empty.
     let memeTextAttributes:[String:Any] = [
         NSStrokeColorAttributeName: UIColor.black,
         NSForegroundColorAttributeName: UIColor.white,
         NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSStrokeWidthAttributeName: -3.0]
+    
+    func enableShareButton() {
+        if imageView.image == nil {
+            shareButton.isEnabled = false
+        } else {
+            shareButton.isEnabled = true
+        }
+    }
 
+    
     //MARK: ViewController Lifecyle functions
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        //MARK: CONFIGURING UI ELEMENTS
-        
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .black
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        shareButton.isEnabled = false
+        enableShareButton()
         
         topTextField.defaultTextAttributes = memeTextAttributes
         topTextField.textAlignment = .center
@@ -59,6 +69,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         view.addGestureRecognizer(tap)
     }
     
+    
     //Hide Status Bar
     override var prefersStatusBarHidden: Bool {
         return true
@@ -68,22 +79,25 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
+    
 
     //MARK: IMAGE PICKER FUNCTIONS
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.image = image
+            enableShareButton()
         }
         dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+        enableShareButton()
     }
     
     
-    //MARK: SHOW AND HIDE KEYBOARD AND MOVE VC
+    //MARK: SHOW AND HIDE KEYBOARD AND MOVE VIEW
     
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
         
@@ -103,43 +117,49 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func subscribeToKeyboardNotifications() {
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
     }
     
     func unsubscribeFromKeyboardNotifications() {
+        
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
 
     @IBAction func bottomTextFieldEdit(_ sender: AnyObject) {
+        
         subscribeToKeyboardNotifications()
     }
     
     @IBAction func bottomTextFieldEditEnded(_ sender: AnyObject) {
+        
         unsubscribeFromKeyboardNotifications()
     }
     
     
     //MARK: TEXTFIELD FUNCTIONS
     
-    var tempText: String? //variable to hold the default text of textfield so you can change text back if textfield is empty.
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        
         tempText = textField.text
         if (textField.text == defaultTopText || textField.text == defaultBottomText) {
             textField.text = ""
         }
+        cancelButton.isEnabled = false
         bottomBar.isHidden = true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
         if textField.text == "" {
             textField.text = tempText
         } else {
             let userText = textField.text
             textField.text = userText
         }
+        cancelButton.isEnabled = true
         bottomBar.isHidden = false
     }
     
@@ -155,7 +175,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         picker.delegate = self
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
-        shareButton.isEnabled = true
     }
     
     @IBAction func pickImageFromCamera(_ sender: AnyObject) {
@@ -164,7 +183,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         picker.delegate = self
         picker.sourceType = .camera
         present(picker, animated: true, completion: nil)
-        shareButton.isEnabled = true
     }
     
     @IBAction func shareMeme(_ sender: AnyObject) {
@@ -209,10 +227,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imageView.image = nil
         topTextField.text = defaultTopText
         bottomTextField.text = defaultBottomText
-        shareButton.isEnabled = false
+        enableShareButton()
     }
     
-
-
 }
 
