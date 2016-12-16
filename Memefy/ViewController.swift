@@ -44,7 +44,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         shareButton.isEnabled = false
         
-        
         topTextField.defaultTextAttributes = memeTextAttributes
         topTextField.textAlignment = .center
         topTextField.delegate = self
@@ -54,8 +53,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomTextField.textAlignment = .center
         bottomTextField.delegate = self
         bottomTextField.text = defaultBottomText
+        
+        //Lets you tap out of a textField
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
+    //Hide Status Bar
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
 
     //MARK: IMAGE PICKER FUNCTIONS
     
@@ -116,19 +128,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func textFieldDidBeginEditing(_ textField: UITextField) {
         tempText = textField.text
         if (textField.text == defaultTopText || textField.text == defaultBottomText) {
-        //if textField.text == tempText {
             textField.text = ""
         }
+        bottomBar.isHidden = true
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+    func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text == "" {
             textField.text = tempText
         } else {
             let userText = textField.text
             textField.text = userText
         }
+        bottomBar.isHidden = false
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         textField.resignFirstResponder()
         return true
     }
@@ -185,6 +201,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         return meme
     }
+
+    
+    //MARK: CANCEL
+    
+    @IBAction func cancel(_ sender: Any) {
+        imageView.image = nil
+        topTextField.text = defaultTopText
+        bottomTextField.text = defaultBottomText
+        shareButton.isEnabled = false
+    }
+    
 
 
 }

@@ -522,6 +522,7 @@
 				A4DB96E11DFFBABE00BF55AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A4DB96E21DFFBABE00BF55AF /* Build configuration list for PBXNativeTarget "MemefyTests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +531,7 @@
 				A4DB96E41DFFBABE00BF55AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A4DB96E51DFFBABE00BF55AF /* Build configuration list for PBXNativeTarget "MemefyUITests" */ = {
 			isa = XCConfigurationList;
@@ -538,6 +540,7 @@
 				A4DB96E71DFFBABE00BF55AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

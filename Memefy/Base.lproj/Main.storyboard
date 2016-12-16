@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,8 +21,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7La-6f-bIp"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7La-6f-bIp">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HLr-o4-Yyb">
+                                <rect key="frame" x="0.0" y="555" width="375" height="48"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -29,41 +35,54 @@
                                 </connections>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Znl-IF-k5z">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="jdz-TF-8Kq"/>
                                 </constraints>
                                 <items>
                                     <barButtonItem title="Camera" id="w70-0G-tgQ">
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="pickImageFromCamera:" destination="BYZ-38-t0r" id="y0a-OJ-0ZP"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="OCj-vQ-wam"/>
                                     <barButtonItem title="Album" id="1dL-w4-sCk">
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="pickImageFromAlbum:" destination="BYZ-38-t0r" id="maA-CO-MdM"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <color key="barTintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qmq-IB-2Oj">
+                                <rect key="frame" x="0.0" y="64" width="375" height="48"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cje-s3-CSF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="oXG-hq-u3e"/>
                                 </constraints>
                                 <items>
                                     <barButtonItem title="Share" id="aTx-YK-NLY">
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="shareMeme:" destination="BYZ-38-t0r" id="Up5-H3-vqh"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Fwy-bb-vQV"/>
-                                    <barButtonItem title="Cancel" id="G9F-DX-cHS"/>
+                                    <barButtonItem title="Cancel" id="G9F-DX-cHS">
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="cancel:" destination="BYZ-38-t0r" id="jrk-T8-lr2"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
+                                <color key="barTintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -77,13 +96,13 @@
                             <constraint firstItem="Znl-IF-k5z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Pax-RK-dbx"/>
                             <constraint firstItem="7La-6f-bIp" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="R3I-t1-lHY"/>
                             <constraint firstItem="7La-6f-bIp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="RYU-QQ-hOl"/>
-                            <constraint firstItem="Znl-IF-k5z" firstAttribute="top" secondItem="HLr-o4-Yyb" secondAttribute="bottom" constant="21" id="SWr-da-VMn"/>
+                            <constraint firstItem="Znl-IF-k5z" firstAttribute="top" secondItem="HLr-o4-Yyb" secondAttribute="bottom" constant="20" id="SWr-da-VMn"/>
                             <constraint firstItem="Cje-s3-CSF" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="bO9-p8-FsC"/>
                             <constraint firstItem="HLr-o4-Yyb" firstAttribute="width" secondItem="Znl-IF-k5z" secondAttribute="width" id="bhk-bq-Y0t"/>
                             <constraint firstItem="Znl-IF-k5z" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="gbn-bm-HqI"/>
                             <constraint firstItem="Cje-s3-CSF" firstAttribute="top" secondItem="7La-6f-bIp" secondAttribute="top" id="gmH-uJ-A2G"/>
                             <constraint firstItem="7La-6f-bIp" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="lUo-Np-4JZ"/>
-                            <constraint firstItem="qmq-IB-2Oj" firstAttribute="top" secondItem="Cje-s3-CSF" secondAttribute="bottom" constant="16" id="zES-8C-wgi"/>
+                            <constraint firstItem="qmq-IB-2Oj" firstAttribute="top" secondItem="Cje-s3-CSF" secondAttribute="bottom" constant="20" id="zES-8C-wgi"/>
                         </constraints>
                     </view>
                     <connections>
