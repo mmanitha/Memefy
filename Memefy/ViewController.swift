@@ -34,16 +34,43 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSStrokeWidthAttributeName: -3.0]
     
-    func enableShareButton() {
-        if imageView.image == nil {
+    
+    // MARK: UI Functions
+    
+    enum UIState {
+        case noImage, textFieldEditing, withImage
+    }
+    
+    func configureUI(_ state: UIState) {
+        switch(state) {
+        case .noImage:
             shareButton.isEnabled = false
-        } else {
+            cancelButton.isEnabled = false
+            topBar.isHidden = false
+            bottomBar.isHidden = false
+        case .textFieldEditing:
+            shareButton.isEnabled = false
+            cancelButton.isEnabled = false
+            topBar.isHidden = false
+            bottomBar.isHidden = true
+        case .withImage:
             shareButton.isEnabled = true
+            cancelButton.isEnabled = true
+            topBar.isHidden = false
+            bottomBar.isHidden = false
         }
     }
-
     
-    //MARK: ViewController Lifecyle functions
+    func checkforImageThenConfigureUI() {
+        if imageView.image == nil {
+            configureUI(.noImage)
+        } else {
+            configureUI(.withImage)
+        }
+    }
+    
+    
+    //MARK: VC Lifecyle functions
     
     override func viewDidLoad() {
         
@@ -52,7 +79,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .black
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        enableShareButton()
         
         topTextField.defaultTextAttributes = memeTextAttributes
         topTextField.textAlignment = .center
@@ -63,6 +89,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomTextField.textAlignment = .center
         bottomTextField.delegate = self
         bottomTextField.text = defaultBottomText
+        
+        checkforImageThenConfigureUI()
         
         //Lets you tap out of a textField
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
@@ -86,14 +114,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.image = image
-            enableShareButton()
+            checkforImageThenConfigureUI()
         }
         dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
-        enableShareButton()
+        checkforImageThenConfigureUI()
     }
     
     
@@ -108,34 +136,25 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     func keyboardWillShow(_ notification:Notification) {
         
-        view.frame.origin.y -= getKeyboardHeight(notification)
+        view.frame.origin.y = -getKeyboardHeight(notification)
     }
     
     func keyboardWillHide(_ notification:Notification) {
         
-        view.frame.origin.y += getKeyboardHeight(notification)
-    }
-    
-    func subscribeToKeyboardNotifications() {
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
-    }
-    
-    func unsubscribeFromKeyboardNotifications() {
-        
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+        view.frame.origin.y  = 0
     }
 
     @IBAction func bottomTextFieldEdit(_ sender: AnyObject) {
         
-        subscribeToKeyboardNotifications()
-    }
+        //Subscribe to Keyboard Notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)    }
     
     @IBAction func bottomTextFieldEditEnded(_ sender: AnyObject) {
         
-        unsubscribeFromKeyboardNotifications()
+        //Unsubscribe from Keyboard Notifications
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     
     
@@ -147,8 +166,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if (textField.text == defaultTopText || textField.text == defaultBottomText) {
             textField.text = ""
         }
-        cancelButton.isEnabled = false
-        bottomBar.isHidden = true
+        configureUI(.textFieldEditing)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -159,8 +177,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             let userText = textField.text
             textField.text = userText
         }
-        cancelButton.isEnabled = true
-        bottomBar.isHidden = false
+        checkforImageThenConfigureUI()
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -224,10 +242,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //MARK: CANCEL
     
     @IBAction func cancel(_ sender: Any) {
+        
         imageView.image = nil
         topTextField.text = defaultTopText
         bottomTextField.text = defaultBottomText
-        enableShareButton()
+        checkforImageThenConfigureUI()
     }
     
 }

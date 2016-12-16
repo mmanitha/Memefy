@@ -40,14 +40,14 @@
                                     <constraint firstAttribute="height" constant="44" id="jdz-TF-8Kq"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Camera" id="w70-0G-tgQ">
+                                    <barButtonItem systemItem="camera" id="w70-0G-tgQ">
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="pickImageFromCamera:" destination="BYZ-38-t0r" id="y0a-OJ-0ZP"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="OCj-vQ-wam"/>
-                                    <barButtonItem title="Album" id="1dL-w4-sCk">
+                                    <barButtonItem title="Photo Album" id="1dL-w4-sCk">
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="pickImageFromAlbum:" destination="BYZ-38-t0r" id="maA-CO-MdM"/>
@@ -68,14 +68,14 @@
                                     <constraint firstAttribute="height" constant="44" id="oXG-hq-u3e"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Share" id="aTx-YK-NLY">
+                                    <barButtonItem systemItem="action" id="aTx-YK-NLY">
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="shareMeme:" destination="BYZ-38-t0r" id="Up5-H3-vqh"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Fwy-bb-vQV"/>
-                                    <barButtonItem title="Cancel" id="G9F-DX-cHS">
+                                    <barButtonItem systemItem="cancel" id="G9F-DX-cHS">
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="cancel:" destination="BYZ-38-t0r" id="jrk-T8-lr2"/>
