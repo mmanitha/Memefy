@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -65,22 +64,22 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="qmq-IB-2Oj" firstAttribute="centerX" secondItem="7La-6f-bIp" secondAttribute="centerX" id="55g-6H-QSb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Cje-s3-CSF" secondAttribute="trailing" constant="-20" id="59Z-s5-1zw"/>
-                            <constraint firstItem="7La-6f-bIp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="24" id="Ab7-sM-kki"/>
-                            <constraint firstItem="qmq-IB-2Oj" firstAttribute="width" secondItem="7La-6f-bIp" secondAttribute="width" id="Fx1-ff-3yk"/>
-                            <constraint firstItem="7La-6f-bIp" firstAttribute="top" secondItem="qmq-IB-2Oj" secondAttribute="bottom" constant="-64" id="HKP-ra-LNb"/>
+                            <constraint firstItem="qmq-IB-2Oj" firstAttribute="width" secondItem="7La-6f-bIp" secondAttribute="width" id="0la-HX-xP1"/>
+                            <constraint firstItem="HLr-o4-Yyb" firstAttribute="centerX" secondItem="Znl-IF-k5z" secondAttribute="centerX" id="7u5-4p-iH5"/>
+                            <constraint firstItem="qmq-IB-2Oj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Dk5-3D-5Td"/>
+                            <constraint firstItem="Cje-s3-CSF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HkD-g8-i3w"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Znl-IF-k5z" secondAttribute="bottom" id="JyM-Td-Iio"/>
+                            <constraint firstItem="7La-6f-bIp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LXN-PX-kBV"/>
                             <constraint firstItem="Znl-IF-k5z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Pax-RK-dbx"/>
-                            <constraint firstItem="Cje-s3-CSF" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="RE8-RI-FpD"/>
-                            <constraint firstItem="Znl-IF-k5z" firstAttribute="top" secondItem="7La-6f-bIp" secondAttribute="bottom" id="Tth-FB-Sj0"/>
-                            <constraint firstItem="7La-6f-bIp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="V3r-Fo-vca"/>
-                            <constraint firstItem="HLr-o4-Yyb" firstAttribute="centerX" secondItem="7La-6f-bIp" secondAttribute="centerX" id="VO9-XF-y5h"/>
-                            <constraint firstItem="HLr-o4-Yyb" firstAttribute="width" secondItem="7La-6f-bIp" secondAttribute="width" id="Z00-tR-J0d"/>
+                            <constraint firstItem="7La-6f-bIp" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="R3I-t1-lHY"/>
+                            <constraint firstItem="7La-6f-bIp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="RYU-QQ-hOl"/>
+                            <constraint firstItem="Znl-IF-k5z" firstAttribute="top" secondItem="HLr-o4-Yyb" secondAttribute="bottom" constant="21" id="SWr-da-VMn"/>
                             <constraint firstItem="Cje-s3-CSF" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="bO9-p8-FsC"/>
+                            <constraint firstItem="HLr-o4-Yyb" firstAttribute="width" secondItem="Znl-IF-k5z" secondAttribute="width" id="bhk-bq-Y0t"/>
                             <constraint firstItem="Znl-IF-k5z" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="gbn-bm-HqI"/>
-                            <constraint firstItem="HLr-o4-Yyb" firstAttribute="top" secondItem="7La-6f-bIp" secondAttribute="bottom" constant="-69" id="ofs-Wj-Ocj"/>
-                            <constraint firstItem="7La-6f-bIp" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="zQd-Fs-i2d"/>
+                            <constraint firstItem="Cje-s3-CSF" firstAttribute="top" secondItem="7La-6f-bIp" secondAttribute="top" id="gmH-uJ-A2G"/>
+                            <constraint firstItem="7La-6f-bIp" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="lUo-Np-4JZ"/>
+                            <constraint firstItem="qmq-IB-2Oj" firstAttribute="top" secondItem="Cje-s3-CSF" secondAttribute="bottom" constant="16" id="zES-8C-wgi"/>
                         </constraints>
                     </view>
                     <connections>
@@ -95,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-80.799999999999997" y="138.0809595202399"/>
+            <point key="canvasLocation" x="-82" y="134"/>
         </scene>
     </scenes>
 </document>

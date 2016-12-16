@@ -120,8 +120,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //MARK: TEXTFIELD FUNCTIONS
     
+    var tempText: String? //variable to hold the default text of textfield so you can change text back if textfield is empty.
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+        tempText = textField.text
         if (textField.text == defaultTopText || textField.text == defaultBottomText) {
             textField.text = ""
         }
@@ -129,8 +131,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        let userText = textField.text
-        textField.text = userText
+        if textField.text == "" {
+            textField.text = tempText
+        } else {
+            let userText = textField.text
+            textField.text = userText
+        }
         textField.resignFirstResponder()
         return true
     }
