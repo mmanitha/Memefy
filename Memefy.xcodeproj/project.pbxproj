@@ -15,6 +15,7 @@
 		A4DB96D01DFFBABE00BF55AF /* MemefyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB96CF1DFFBABE00BF55AF /* MemefyTests.swift */; };
 		A4DB96DB1DFFBABE00BF55AF /* MemefyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB96DA1DFFBABE00BF55AF /* MemefyUITests.swift */; };
 		A4DB96E91E02452A00BF55AF /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB96E81E02452A00BF55AF /* Meme.swift */; };
+		A4DB96EB1E03799C00BF55AF /* TopTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DB96EA1E03799C00BF55AF /* TopTextFieldDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		A4DB96DA1DFFBABE00BF55AF /* MemefyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemefyUITests.swift; sourceTree = "<group>"; };
 		A4DB96DC1DFFBABE00BF55AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4DB96E81E02452A00BF55AF /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
+		A4DB96EA1E03799C00BF55AF /* TopTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopTextFieldDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				A4DB96C31DFFBABE00BF55AF /* LaunchScreen.storyboard */,
 				A4DB96C61DFFBABE00BF55AF /* Info.plist */,
 				A4DB96E81E02452A00BF55AF /* Meme.swift */,
+				A4DB96EA1E03799C00BF55AF /* TopTextFieldDelegate.swift */,
 			);
 			path = Memefy;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4DB96EB1E03799C00BF55AF /* TopTextFieldDelegate.swift in Sources */,
 				A4DB96E91E02452A00BF55AF /* Meme.swift in Sources */,
 				A4DB96BD1DFFBABE00BF55AF /* ViewController.swift in Sources */,
 				A4DB96BB1DFFBABE00BF55AF /* AppDelegate.swift in Sources */,

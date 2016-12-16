@@ -12,8 +12,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //MARK: OUTLETS
     
-    @IBOutlet weak var topText: UITextField!
-    @IBOutlet weak var bottomText: UITextField!
+    @IBOutlet weak var topTextField: UITextField!
+    @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
@@ -45,32 +45,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         shareButton.isEnabled = false
         
         
-        topText.defaultTextAttributes = memeTextAttributes
-        topText.textAlignment = .center
-        topText.delegate = self
-        topText.text = defaultTopText
+        topTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.textAlignment = .center
+        topTextField.delegate = self
+        topTextField.text = defaultTopText
 
-        bottomText.defaultTextAttributes = memeTextAttributes
-        bottomText.textAlignment = .center
-        bottomText.delegate = self
-        bottomText.text = defaultBottomText
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(animated)
-        
-        //Subscribe to Keyboard Notifications
-        subscribeToKeyboardNotifications()
-
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        super.viewWillDisappear(animated)
-        
-        //Unsubscribe from Keyboard Notifications
-        unsubscribeFromKeyboardNotifications()
+        bottomTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.textAlignment = .center
+        bottomTextField.delegate = self
+        bottomTextField.text = defaultBottomText
     }
     
 
@@ -117,6 +100,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
 
+    @IBAction func bottomTextFieldEdit(_ sender: AnyObject) {
+        subscribeToKeyboardNotifications()
+    }
+    
+    @IBAction func bottomTextFieldEditEnded(_ sender: AnyObject) {
+        unsubscribeFromKeyboardNotifications()
+    }
+    
     
     //MARK: TEXTFIELD FUNCTIONS
     
@@ -125,6 +116,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func textFieldDidBeginEditing(_ textField: UITextField) {
         tempText = textField.text
         if (textField.text == defaultTopText || textField.text == defaultBottomText) {
+        //if textField.text == tempText {
             textField.text = ""
         }
     }
@@ -166,6 +158,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(activity, animated: true, completion: nil)
     }
     
+    
     //MARK: SAVE OUT MEME
     
     func generateMemedImage() -> UIImage {
@@ -188,7 +181,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func save() -> Meme {
         
         // Create the meme
-        let meme = Meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
         
         return meme
     }
