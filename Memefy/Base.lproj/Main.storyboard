@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Meme Editor View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Memefy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MemeEditorViewController" customModule="Memefy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -29,10 +29,6 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                                <connections>
-                                    <action selector="bottomTextFieldEdit:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="aSc-KT-hP6"/>
-                                    <action selector="bottomTextFieldEditEnded:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="AM0-hv-VhK"/>
-                                </connections>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Znl-IF-k5z">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
@@ -107,13 +103,13 @@
                     </view>
                     <connections>
                         <outlet property="bottomBar" destination="Znl-IF-k5z" id="UeN-Bf-Alo"/>
-                        <outlet property="bottomTextField" destination="HLr-o4-Yyb" id="taT-G1-zvM"/>
+                        <outlet property="bottomTextField" destination="HLr-o4-Yyb" id="25W-PM-OpE"/>
                         <outlet property="cameraButton" destination="w70-0G-tgQ" id="paO-WU-M9s"/>
                         <outlet property="cancelButton" destination="G9F-DX-cHS" id="Omd-yR-lU0"/>
                         <outlet property="imageView" destination="7La-6f-bIp" id="OBG-U2-wPD"/>
                         <outlet property="shareButton" destination="aTx-YK-NLY" id="bom-J9-2OK"/>
                         <outlet property="topBar" destination="Cje-s3-CSF" id="3ot-Yq-tO3"/>
-                        <outlet property="topTextField" destination="qmq-IB-2Oj" id="Zea-nN-cEh"/>
+                        <outlet property="topTextField" destination="qmq-IB-2Oj" id="bkq-P6-6Fc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

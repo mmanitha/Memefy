@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     
     //MARK: OUTLETS
@@ -78,25 +78,36 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .black
-        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
-        topTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.textAlignment = .center
-        topTextField.delegate = self
         topTextField.text = defaultTopText
-
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.textAlignment = .center
-        bottomTextField.delegate = self
         bottomTextField.text = defaultBottomText
+        configureTextField(textField: topTextField)
+        configureTextField(textField: bottomTextField)
         
         checkforImageThenConfigureUI()
         
         //Lets you tap out of a textField
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeToKeyboardNotifications()
+    }
+    
+    //Set text Field
+    func configureTextField(textField: UITextField) {
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = .center
+        textField.delegate = self
+    }
     
     //Hide Status Bar
     override var prefersStatusBarHidden: Bool {
@@ -135,23 +146,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     func keyboardWillShow(_ notification:Notification) {
-        
-        view.frame.origin.y = -getKeyboardHeight(notification)
+        if bottomTextField.isFirstResponder {
+            view.frame.origin.y = -getKeyboardHeight(notification)
+        }
     }
     
     func keyboardWillHide(_ notification:Notification) {
-        
-        view.frame.origin.y  = 0
+        if bottomTextField.isFirstResponder {
+            view.frame.origin.y = 0
+        }
     }
 
-    @IBAction func bottomTextFieldEdit(_ sender: AnyObject) {
-        
+    func subscribeToKeyboardNotifications() {
         //Subscribe to Keyboard Notifications
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)    }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+    }
     
-    @IBAction func bottomTextFieldEditEnded(_ sender: AnyObject) {
-        
+    func unsubscribeToKeyboardNotifications() {
         //Unsubscribe from Keyboard Notifications
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
@@ -189,25 +201,48 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     @IBAction func pickImageFromAlbum(_ sender: AnyObject) {
         
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.sourceType = .photoLibrary
-        present(picker, animated: true, completion: nil)
+        pickAnImageFromSource(source: .photoLibrary)
     }
     
     @IBAction func pickImageFromCamera(_ sender: AnyObject) {
         
+        pickAnImageFromSource(source: .camera)
+    }
+    
+    
+    func pickAnImageFromSource(source: UIImagePickerControllerSourceType) {
+        
+        // code to pick an image from source
         let picker = UIImagePickerController()
         picker.delegate = self
-        picker.sourceType = .camera
+        picker.sourceType = source
         present(picker, animated: true, completion: nil)
     }
     
+    
     @IBAction func shareMeme(_ sender: AnyObject) {
         
-        let finishedMeme = save()
-        let activity = UIActivityViewController(activityItems: [finishedMeme.memedImage], applicationActivities: nil)
-        present(activity, animated: true, completion: nil)
+        // generate memed image
+        let finishedMeme = generateMemedImage()
+        
+        // provide memed image to activity VC
+        let activityVC = UIActivityViewController(activityItems: [finishedMeme], applicationActivities: nil)
+        
+        activityVC.completionWithItemsHandler = {(activity, completed, items, error) in
+            if (completed) {
+                self.save()
+                let alert = UIAlertController(title: "Success!", message: "", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            } else if ((error) != nil) {
+                let alert = UIAlertController(title: "Oh no!", message: "There was an error.", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Try again.", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        
+        present(activityVC, animated: true, completion: nil)
+
     }
     
     
@@ -230,12 +265,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return memedImage
     }
     
-    func save() -> Meme {
-        
+    func save() {
+
         // Create the meme
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
-        
-        return meme
     }
 
     
