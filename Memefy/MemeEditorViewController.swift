@@ -45,7 +45,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         switch(state) {
         case .noImage:
             shareButton.isEnabled = false
-            cancelButton.isEnabled = false
+            cancelButton.title = "Dismiss"
+            cancelButton.isEnabled = true
             topBar.isHidden = false
             bottomBar.isHidden = false
         case .textFieldEditing:
@@ -55,6 +56,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             bottomBar.isHidden = true
         case .withImage:
             shareButton.isEnabled = true
+            cancelButton.title = "Clear"
             cancelButton.isEnabled = true
             topBar.isHidden = false
             bottomBar.isHidden = false
@@ -266,20 +268,27 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func save() {
-
         // Create the meme
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.storedMemes.append(meme)
+        
+        self.dismiss(animated: true)
     }
 
     
     //MARK: CANCEL
     
     @IBAction func cancel(_ sender: Any) {
-        
-        imageView.image = nil
-        topTextField.text = defaultTopText
-        bottomTextField.text = defaultBottomText
-        checkforImageThenConfigureUI()
+        if (cancelButton.isEnabled == true && imageView.image == nil){
+            self.dismiss(animated: true)
+        } else {
+            imageView.image = nil
+            topTextField.text = defaultTopText
+            bottomTextField.text = defaultBottomText
+            checkforImageThenConfigureUI()
+        }
     }
     
 }
